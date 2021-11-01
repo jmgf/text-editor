@@ -4,7 +4,9 @@ function File({file}) {
     return (
         
         <>
-            <h3>{file.name}</h3>
+            <h2 title={file.name}>
+                {file.name}
+            </h2>
         </>
     )
 }

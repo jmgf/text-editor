@@ -5,7 +5,7 @@ import File from "./File"
 
 function TreeItem({item}) {
     return (
-        <div style={{marginLeft: '30px', cursor: 'pointer'}}>
+        <div className="TreeItem">
             {
                 item.type === Constants.FOLDER ?
                 <Folder folder={item}/> :

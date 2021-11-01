@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.FileTree {
+  margin-left: 10px;
+  width: 13%;
+}
+
+.TreeItem {
+  cursor: pointer;
+}
+
+.TreeItem > h1, .TreeItem > h2, .TreeItem > h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.TreeItem > h1:hover, .TreeItem > h2:hover, .TreeItem > h3:hover {
+  background-color: #515152;
+}
+
+.folderName {
+  color: #b5b5b5fa;
+}
+
+.folderChildren {
+  border-left: 2px solid darkgray;
+  padding-left: 20px;
+}

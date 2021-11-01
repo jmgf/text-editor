@@ -8,15 +8,22 @@ function Folder({folder}) {
     }
     return (
         <>
-            <h2 style={{color: 'gray'}} 
-                onMouseOver={(event) => (event.target.style.backgroundColor = 'blue')}
-                onClick={toggleOpenState}>
-                <span style={{color: 'darkgray'}}>> </span>
+            <h2 className="folderName"
+                onClick={toggleOpenState}
+                title={folder.name}>
+                <span style={{color: 'darkgray'}}>
+                    {
+                        open ? 
+                        <span>&#9663;</span> : 
+                        <span>&#9657;</span>
+                    }
+                </span>
+                &nbsp;
                 {folder.name}
             </h2>
             {
                 open && 
-                <div style={{borderLeft: '2px solid darkgray'}}>
+                <div className="folderChildren">
                     { 
                         folder.children.map(folderChild =>
                             <TreeItem id={folderChild.id} item={folderChild} />
