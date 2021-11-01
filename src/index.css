@@ -40,3 +40,7 @@ code {
   border-left: 2px solid darkgray;
   padding-left: 20px;
 }
+
+.folderChildrenClosed {
+  display: none;
+}

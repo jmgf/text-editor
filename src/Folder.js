@@ -2,9 +2,10 @@ import React, { useState } from "react"
 import TreeItem from "./TreeItem"
 
 function Folder({folder}) {
-    let [open, setOpen] = useState(false)
+    let [open, setOpen] = useState(folder.isOpen)
     const toggleOpenState = () => {
         setOpen(previousOpenState => !previousOpenState)
+        console.log(this)
     }
     return (
         <>
@@ -21,16 +22,13 @@ function Folder({folder}) {
                 &nbsp;
                 {folder.name}
             </h2>
-            {
-                open && 
-                <div className="folderChildren">
-                    { 
-                        folder.children.map(folderChild =>
-                            <TreeItem id={folderChild.id} item={folderChild} />
-                        )
-                    }
-                </div>
-            }
+            <div className={`folderChildren ${!open && 'folderChildrenClosed'}`}>
+                { 
+                    folder.children.map(folderChild =>
+                        <TreeItem key={folderChild.id} item={folderChild} />
+                    )
+                }
+            </div>
         </>
     )
 }
