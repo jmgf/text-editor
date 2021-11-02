@@ -1,17 +1,27 @@
 import React, { useState } from "react"
 import TreeItem from "./TreeItem"
 
-function Folder({folder}) {
+function Folder({folder, handleDoubleClick}) {
     let [open, setOpen] = useState(folder.isOpen)
+    let [folderName, setFolderName] = useState(folder.name)
+
     const toggleOpenState = () => {
         setOpen(previousOpenState => !previousOpenState)
-        console.log(this)
     }
+
+    /*
+    const changeFolderName = (event) => {
+        event.stopPropagation()
+        const newFolderName = prompt('Folder name:')
+        setFolderName(previousFolderName => newFolderName)
+    }
+    */
+
     return (
         <>
             <h2 className="folderName"
                 onClick={toggleOpenState}
-                title={folder.name}>
+                title={folderName}>
                 <span style={{color: 'darkgray'}}>
                     {
                         open ? 

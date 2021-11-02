@@ -4,8 +4,13 @@ import Folder from "./Folder"
 import File from "./File"
 
 function TreeItem({item}) {
+    function handleClick(event) {
+        event.stopPropagation()
+        console.log('You selected: ', item.name)
+    }
+
     return (
-        <div className="TreeItem">
+        <div className="TreeItem" onClick={handleClick}>
             {
                 item.type === Constants.FOLDER ?
                 <Folder folder={item}/> :

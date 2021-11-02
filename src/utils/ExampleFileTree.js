@@ -22,7 +22,7 @@ export default [
                 id: 'src_utils',
                 name: 'utils', 
                 type: Constants.FOLDER, 
-                isOpen: true,
+                isOpen: false,
                 children: [
                     { id: 'src_utils_ExampleFileTree.js', name: 'ExampleFileTree.js', type: Constants.FILE },
                     { id: 'src_utils_Constants.js', name: 'Constants.js', type: Constants.FILE }
