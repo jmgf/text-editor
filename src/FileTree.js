@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react"
 import TreeItem from "./TreeItem"
 import LocalStorageHelper from "./utils/LocalStorageHelper"
 
-function FileTree() {
-    let [fileTree, setFiles] = useState(LocalStorageHelper.loadFileTree())
+function FileTree({fileTree, onNameChange, onOpenFile}) {
 
+    /*
     useEffect(() => {
         const intervalId = setInterval(() => {
             LocalStorageHelper.saveFileTree(fileTree)
@@ -14,14 +14,36 @@ function FileTree() {
             clearInterval(intervalId)
         }
     })
+    */
+
+    const handleClearStorage = () => {
+        LocalStorageHelper.deleteFileTree()
+    }
+
+    const handleAddFile = () => {
+        LocalStorageHelper.deleteFileTree()
+    }
+
+    const handleAddFolder = () => {
+        LocalStorageHelper.deleteFileTree()
+    }
 
     return (
         <div className="FileTree">
-            <h2>EXPLORER <button className="settingsButton"></button></h2>
+            <h2 style={{color: '#b5b5b5fa'}}>EXPLORER
+                <button className="addFolderButton"
+                        onClick={handleAddFolder}>
+                </button> 
+                <button className="addFileButton"
+                        onClick={handleAddFile}>
+                </button>
+            </h2>
             {
                 fileTree.map( fileTreeItem =>
                     <TreeItem key={fileTreeItem.id} 
-                              item={fileTreeItem}/>
+                              item={fileTreeItem}
+                              onNameChange={onNameChange}
+                              onOpenFile={onOpenFile}/>
                 )
             }
         </div>

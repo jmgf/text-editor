@@ -1,12 +1,20 @@
 import React, { useState } from "react"
 import TreeItem from "./TreeItem"
 
-function Folder({folder, handleDoubleClick}) {
+function Folder({folder, onNameChange, onOpenFile}) {
     let [open, setOpen] = useState(folder.isOpen)
-    let [folderName, setFolderName] = useState(folder.name)
+    let [isSettingsVisible, setIsSettingsVisible]  = useState(false)
 
     const toggleOpenState = () => {
         setOpen(previousOpenState => !previousOpenState)
+    }
+
+    const handleNameChange = (event) => {
+        event.stopPropagation()
+        const newName = prompt('Folder name:', folder.name)
+        if (newName) {
+            onNameChange(folder.id, newName, event)
+        }
     }
 
     /*
@@ -21,7 +29,9 @@ function Folder({folder, handleDoubleClick}) {
         <>
             <h2 className="folderName"
                 onClick={toggleOpenState}
-                title={folderName}>
+                onMouseEnter={() => {setIsSettingsVisible(true)}}
+                onMouseLeave={() => {setIsSettingsVisible(false)}}
+                title={folder.name}>
                 <span style={{color: 'darkgray'}}>
                     {
                         open ? 
@@ -31,11 +41,16 @@ function Folder({folder, handleDoubleClick}) {
                 </span>
                 &nbsp;
                 {folder.name}
+                {isSettingsVisible && 
+                 <button className="settingsButton" onClick={handleNameChange}></button>}
             </h2>
-            <div className={`folderChildren ${!open && 'folderChildrenClosed'}`}>
+            <div className={`folderChildren ${!open ? 'folderChildrenClosed' : ''}`}>
                 { 
                     folder.children.map(folderChild =>
-                        <TreeItem key={folderChild.id} item={folderChild} />
+                        <TreeItem key={folderChild.id} 
+                                  item={folderChild} 
+                                  onNameChange={onNameChange}
+                                  onOpenFile={onOpenFile}/>
                     )
                 }
             </div>

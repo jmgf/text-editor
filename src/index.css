@@ -51,6 +51,7 @@ code {
   width: 100%;
   box-sizing: border-box;
   padding: 20px;
+  padding-top: 0px;
   /* 
     border-right: 1px solid white; 
     box-sizing: border-box;
@@ -85,6 +86,13 @@ code {
   text-overflow: ellipsis;
 }
 
+.shortFileNameSpan {
+  float: left;
+  width: 10.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .TreeItem > h1:hover, .TreeItem > h2:hover, .TreeItem > h3:hover {
   background-color: #515152;
 }
@@ -95,7 +103,7 @@ code {
 
 .folderChildren {
   border-left: 2px solid darkgray;
-  padding-left: 20px;
+  padding-left: 1rem;
 }
 
 .folderChildrenClosed {
@@ -104,10 +112,51 @@ code {
 
 .settingsButton {
   cursor: pointer;
-  margin-right: 20px;
+  margin-right: 0.5rem;
+  margin-top: 3px;
   float: right;
   background-color: transparent;
   background-image: url("settings-svgrepo-com.svg");
+  background-repeat: no-repeat;
+  height: 1.4rem;
+  width: 1.4rem;
+  border: none;
+}
+
+.saveButton {
+  /*
+  float: right;
+  */
+  margin-left: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url("save-svgrepo-com.svg");
+  background-repeat: no-repeat;
+  height: 1.4rem;
+  width: 1.4rem;
+  border: none;
+}
+
+.addFileButton {
+  cursor: pointer;
+  margin-right: 0.5rem;
+  margin-top: 3px;
+  float: right;
+  background-color: transparent;
+  background-image: url("actions-add-file-svgrepo-com.svg");
+  background-repeat: no-repeat;
+  height: 1.4rem;
+  width: 1.4rem;
+  border: none;
+}
+
+.addFolderButton {
+  cursor: pointer;
+  margin-right: 0.5rem;
+  margin-top: 3px;
+  float: right;
+  background-color: transparent;
+  background-image: url("add-folder-svgrepo-com.svg");
   background-repeat: no-repeat;
   height: 1.4rem;
   width: 1.4rem;

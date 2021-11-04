@@ -3,18 +3,14 @@ import Constants from "./utils/Constants"
 import Folder from "./Folder"
 import File from "./File"
 
-function TreeItem({item}) {
-    function handleClick(event) {
-        event.stopPropagation()
-        console.log('You selected: ', item.name)
-    }
+function TreeItem({item, onNameChange, onOpenFile}) {
 
     return (
-        <div className="TreeItem" onClick={handleClick}>
+        <div className="TreeItem">
             {
                 item.type === Constants.FOLDER ?
-                <Folder folder={item}/> :
-                <File file={item}/>
+                <Folder folder={item} onNameChange={onNameChange} onOpenFile={onOpenFile}/> :
+                <File file={item} onNameChange={onNameChange} onOpenFile={onOpenFile}/>
             }
         </div>
     )
