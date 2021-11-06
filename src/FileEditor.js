@@ -6,9 +6,7 @@ function FileEditor({file, onChangeFileContent}) {
     //let [fileContent, setFileContent] = useState(content ? content : '')
 
     const handleSaveFile = (event) => {
-        if (file.content) {
-            LocalStorageHelper.saveFileContent(file.id, file.content)
-        }
+        LocalStorageHelper.saveFileContent(file.id, file.content)
     }
 
     const handleChangeFileContent = (event) => {

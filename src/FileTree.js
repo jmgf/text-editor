@@ -38,6 +38,7 @@ function FileTree({fileTree, onNameChange, onOpenFile}) {
                         onClick={handleAddFile}>
                 </button>
             </h2>
+            <div className="fileList">
             {
                 fileTree.map( fileTreeItem =>
                     <TreeItem key={fileTreeItem.id} 
@@ -46,6 +47,7 @@ function FileTree({fileTree, onNameChange, onOpenFile}) {
                               onOpenFile={onOpenFile}/>
                 )
             }
+            </div>
         </div>
     )
 }
