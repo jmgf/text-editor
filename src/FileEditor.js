@@ -30,9 +30,9 @@ function FileEditor({file, onChangeFileContent}) {
                 </textarea>
               </> 
               :
-              <>
-                <h1 style={{textAlign: 'center', marginTop: '10rem'}}>Open a file to get started.</h1>
-              </>
+              <div class="fileArea">
+                <h1 style={{textAlign: 'center', paddingTop: '10rem'}}>Open a file to get started.</h1>
+              </div>
             }
             
         </div>

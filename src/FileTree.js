@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import TreeItem from "./TreeItem"
 import LocalStorageHelper from "./utils/LocalStorageHelper"
 
-function FileTree({fileTree, onNameChange, onOpenFile}) {
+function FileTree({fileTree, onNameChange, onDelete, onOpenFile, onAddFolder, onAddFile}) {
 
     /*
     useEffect(() => {
@@ -21,11 +21,11 @@ function FileTree({fileTree, onNameChange, onOpenFile}) {
     }
 
     const handleAddFile = () => {
-        LocalStorageHelper.deleteFileTree()
+        onAddFile()
     }
 
     const handleAddFolder = () => {
-        LocalStorageHelper.deleteFileTree()
+        onAddFolder()
     }
 
     return (
@@ -43,7 +43,7 @@ function FileTree({fileTree, onNameChange, onOpenFile}) {
                 fileTree.map( fileTreeItem =>
                     <TreeItem key={fileTreeItem.id} 
                               item={fileTreeItem}
-                              onNameChange={onNameChange}
+                              onDelete={onDelete}
                               onOpenFile={onOpenFile}/>
                 )
             }

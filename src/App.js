@@ -3,11 +3,16 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import FileTree from "./FileTree"
 import FileEditor from "./FileEditor"
+import Constants from "./utils/Constants"
 import LocalStorageHelper from "./utils/LocalStorageHelper"
 
 function App() {
   let [fileTree, setFiles] = useState(LocalStorageHelper.loadFileTree())
   let [currentFile, setCurrentFile] = useState(undefined)
+
+  useEffect(() => {
+    LocalStorageHelper.saveFileTree(fileTree)
+  }, [fileTree])
 
 
   const changeItemProperty = (list, itemId, property, newValue) => {
@@ -30,7 +35,7 @@ function App() {
       changeItemProperty(newFileTree, itemId, 'name', newName)
       setFiles(newFileTree)
       console.log(`Item ${itemId} name changed to ${newName}`)
-      LocalStorageHelper.saveFileTree(fileTree)
+      
   } 
 
   const handleOpenFile = (file) => {
@@ -41,7 +46,6 @@ function App() {
       })
       console.log(currentFile)
       console.log(`File ${file.id} was opened`)
-      LocalStorageHelper.saveFileTree(fileTree)
   }
 
   const handleChangeFileContent = (file, newContent) => {
@@ -50,6 +54,42 @@ function App() {
       content: newContent
     })
   }
+
+  const handleAddFile = () => {
+    let newFileName = prompt('File name:')
+    let newFileTree = [...fileTree]; // WRONG CLONING METHOD
+    newFileTree.push({
+      name: newFileName,
+      id: newFileName,
+      type: Constants.FILE
+    })
+    setFiles(newFileTree)
+  }
+
+  const handleAddFolder = () => {
+    let newFolderName = prompt('Folder name:')
+    let newFileTree = [...fileTree]; // WRONG CLONING METHOD
+    newFileTree.push({
+      name: newFolderName,
+      id: newFolderName,
+      type: Constants.FOLDER,
+      isOpen: false,
+      children: []
+    })
+    setFiles(newFileTree)
+    
+  }
+
+  const handleDelete = (itemId, itemName) => {
+    const answer = window.confirm(`Are you sure you want do delete '${itemName}'?`)
+    if (answer) {
+      let newFileTree = [...fileTree]; // WRONG CLONING METHOD
+      newFileTree = newFileTree.filter(item => item.id !== itemId)
+      setFiles(newFileTree)
+    }
+  }
+
+
 
   return (
     <div className="App">
@@ -60,7 +100,10 @@ function App() {
           <div className="column fileTreeColumn">
             <FileTree fileTree={fileTree}
                       onNameChange={handleItemNameChange}
-                      onOpenFile={handleOpenFile}/>
+                      onDelete={handleDelete}
+                      onOpenFile={handleOpenFile}
+                      onAddFile={handleAddFile}
+                      onAddFolder={handleAddFolder}/>
           </div>
           <div className="column fileEditorColumn">
             <FileEditor file={currentFile}

@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import TreeItem from "./TreeItem"
 
-function Folder({folder, onNameChange, onOpenFile}) {
+function Folder({folder, onNameChange, onDelete, onOpenFile}) {
     let [open, setOpen] = useState(folder.isOpen)
-    let [isSettingsVisible, setIsSettingsVisible]  = useState(false)
+    let [isDeleteVisible, setIsDeleteVisible]  = useState(false)
 
     const toggleOpenState = () => {
         setOpen(previousOpenState => !previousOpenState)
@@ -15,6 +15,10 @@ function Folder({folder, onNameChange, onOpenFile}) {
         if (newName) {
             onNameChange(folder.id, newName, event)
         }
+    }
+
+    const handleDelete = () => {
+        onDelete(folder.id, folder.name)
     }
 
     /*
@@ -29,8 +33,8 @@ function Folder({folder, onNameChange, onOpenFile}) {
         <>
             <h2 className="folderName"
                 onClick={toggleOpenState}
-                onMouseEnter={() => {setIsSettingsVisible(true)}}
-                onMouseLeave={() => {setIsSettingsVisible(false)}}
+                onMouseEnter={() => {setIsDeleteVisible(true)}}
+                onMouseLeave={() => {setIsDeleteVisible(false)}}
                 title={folder.name}>
                 <span style={{color: 'darkgray'}}>
                     {
@@ -41,8 +45,8 @@ function Folder({folder, onNameChange, onOpenFile}) {
                 </span>
                 &nbsp;
                 {folder.name}
-                {isSettingsVisible && 
-                 <button className="settingsButton" onClick={handleNameChange}></button>}
+                {isDeleteVisible && 
+                 <button className="deleteButton" onClick={handleDelete}></button>}
             </h2>
             <div className={`folderChildren ${!open ? 'folderChildrenClosed' : ''}`}>
                 { 

@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 
-function File({file, onNameChange, onOpenFile}) {
-    let [isSettingsVisible, setIsSettingsVisible]  = useState(false)
+function File({file, onNameChange, onDelete, onOpenFile}) {
+    let [isDeleteVisible, setIsDeleteVisible]  = useState(false)
 
     const handleOpenFile = (event) => {
         onOpenFile(file)
@@ -15,16 +15,20 @@ function File({file, onNameChange, onOpenFile}) {
         }
     }
 
+    const handleDelete = () => {
+        onDelete(file.id, file.name)
+    }
+
     return (
         
         <>
             <h2 title={file.name} 
                 onClick={handleOpenFile}
-                onMouseOver={() => {setIsSettingsVisible(true)}}
-                onMouseLeave={() => {setIsSettingsVisible(false)}}>
-                <span className={isSettingsVisible ? 'shortFileNameSpan' : ''}>{file.name}</span>
-                {isSettingsVisible && 
-                <button className="settingsButton" onClick={handleNameChange}></button>}
+                onMouseOver={() => {setIsDeleteVisible(true)}}
+                onMouseLeave={() => {setIsDeleteVisible(false)}}>
+                <span className={isDeleteVisible ? 'shortFileNameSpan' : ''}>{file.name}</span>
+                {isDeleteVisible && 
+                <button className="deleteButton" onClick={handleDelete}></button>}
             </h2>
         </>
     )
